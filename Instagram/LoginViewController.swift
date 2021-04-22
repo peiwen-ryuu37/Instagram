@@ -11,9 +11,9 @@ import SVProgressHUD
 
 class LoginViewController: UIViewController {
     
-    @IBOutlet weak var mailAddressTextField: UITextField!
-    @IBOutlet weak var passwordTextField: UITextField!
-    @IBOutlet weak var displayNameTextField: UITextField!
+    @IBOutlet private weak var mailAddressTextField: UITextField!
+    @IBOutlet private weak var passwordTextField: UITextField!
+    @IBOutlet private weak var displayNameTextField: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,8 +22,8 @@ class LoginViewController: UIViewController {
     }
     
     // ログインボタンをタップしたときに呼ばれるメソッド
-    @IBAction func handleLoginButton(_ sender: Any) {
-        if let address = mailAddressTextField.text, let password = passwordTextField.text {
+    @IBAction private func handleLoginButton(_ sender: Any) {
+        if let address = self.mailAddressTextField.text, let password = self.passwordTextField.text {
             // アドレスとパスワード名のいずれかでも入力されていない時は何もしない
             if address.isEmpty || password.isEmpty {
                 SVProgressHUD.showError(withStatus: "必要項目を入力して下さい")
@@ -51,8 +51,8 @@ class LoginViewController: UIViewController {
     }
     
     // アカウント作成ボタンをタップしたときに呼ばれるメソッド
-    @IBAction func handleCreateAccountButton(_ sender: Any) {
-        if let address = mailAddressTextField.text, let password = passwordTextField.text, let displayName = displayNameTextField.text {
+    @IBAction private func handleCreateAccountButton(_ sender: Any) {
+        if let address = self.mailAddressTextField.text, let password = self.passwordTextField.text, let displayName = self.displayNameTextField.text {
             // アドレスとパスワードと表示名のいずれかでも入力されていない時は何もしない
             if address.isEmpty || password.isEmpty || displayName.isEmpty {
                 print("DEBUG_PRINT: 何かが空文字です。")

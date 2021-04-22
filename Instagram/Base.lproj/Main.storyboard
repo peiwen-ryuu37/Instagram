@@ -15,8 +15,48 @@
                     <view key="view" contentMode="scaleToFill" id="M8V-8U-nYM">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TAO-cF-1CU">
+                                <rect key="frame" x="57" y="124" width="300" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="300" id="hQ7-vg-aVP"/>
+                                </constraints>
+                                <state key="normal" title="ライブラリ" backgroundImage="btn"/>
+                                <connections>
+                                    <action selector="handleLibraryButton:" destination="908-Kw-KUU" eventType="touchUpInside" id="LH1-Br-zAh"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l2Z-ES-544">
+                                <rect key="frame" x="57" y="174" width="300" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="300" id="3Sh-q1-MTP"/>
+                                </constraints>
+                                <state key="normal" title="カメラ" backgroundImage="btn"/>
+                                <connections>
+                                    <action selector="handleCameraButton:" destination="908-Kw-KUU" eventType="touchUpInside" id="eme-NC-iv9"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ggO-u8-aG1">
+                                <rect key="frame" x="57" y="224" width="300" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="300" id="ECv-Bc-ASq"/>
+                                </constraints>
+                                <state key="normal" title="キャンセル" backgroundImage="btn"/>
+                                <connections>
+                                    <action selector="handleCancelButton:" destination="908-Kw-KUU" eventType="touchUpInside" id="dNg-d3-0aZ"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="Cfs-fC-Cma"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="l2Z-ES-544" firstAttribute="top" secondItem="TAO-cF-1CU" secondAttribute="bottom" constant="10" id="0an-yX-JbV"/>
+                            <constraint firstItem="l2Z-ES-544" firstAttribute="centerX" secondItem="M8V-8U-nYM" secondAttribute="centerX" id="38U-wM-fSF"/>
+                            <constraint firstItem="TAO-cF-1CU" firstAttribute="centerX" secondItem="M8V-8U-nYM" secondAttribute="centerX" id="AYY-7t-9Wf"/>
+                            <constraint firstItem="ggO-u8-aG1" firstAttribute="top" secondItem="l2Z-ES-544" secondAttribute="bottom" constant="10" id="Ptj-7A-CWb"/>
+                            <constraint firstItem="TAO-cF-1CU" firstAttribute="top" secondItem="Cfs-fC-Cma" secondAttribute="top" constant="80" id="W3d-Cv-rpQ"/>
+                            <constraint firstItem="ggO-u8-aG1" firstAttribute="centerX" secondItem="M8V-8U-nYM" secondAttribute="centerX" id="zaW-SZ-201"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="投稿" image="camera" id="o6x-aD-Xwv"/>
                 </viewController>

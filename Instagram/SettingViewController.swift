@@ -11,7 +11,7 @@ import SVProgressHUD
 
 class SettingViewController: UIViewController {
 
-    @IBOutlet weak var displayNameTextField: UITextField!
+    @IBOutlet private weak var displayNameTextField: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,8 +30,8 @@ class SettingViewController: UIViewController {
     }
     
     // 表示名変更ボタンをタップしたときに呼ばれるメソッド
-    @IBAction func handleChangeButton(_ sender: Any) {
-        if let displayName = displayNameTextField.text {
+    @IBAction private func handleChangeButton(_ sender: Any) {
+        if let displayName = self.displayNameTextField.text {
 
             // 表示名が入力されていない時はHUDを出して何もしない
             if displayName.isEmpty {
@@ -62,7 +62,7 @@ class SettingViewController: UIViewController {
     }
     
     // ログアウトボタンをタップしたときに呼ばれるメソッド
-    @IBAction func handleLogoutButton(_ sender: Any) {
+    @IBAction private func handleLogoutButton(_ sender: Any) {
         // ログアウトする
         try! Auth.auth().signOut()
 
