@@ -270,10 +270,25 @@
                     <view key="view" contentMode="scaleToFill" id="8oy-Ju-F3G">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="9N1-Mi-205">
+                                <rect key="frame" x="0.0" y="44" width="414" height="769"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="PHN-U0-Gxy"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="9N1-Mi-205" firstAttribute="leading" secondItem="PHN-U0-Gxy" secondAttribute="leading" id="9gP-EU-fIe"/>
+                            <constraint firstItem="9N1-Mi-205" firstAttribute="top" secondItem="PHN-U0-Gxy" secondAttribute="top" id="H0J-6k-Qwi"/>
+                            <constraint firstItem="PHN-U0-Gxy" firstAttribute="bottom" secondItem="9N1-Mi-205" secondAttribute="bottom" id="KFk-kl-vbd"/>
+                            <constraint firstItem="PHN-U0-Gxy" firstAttribute="trailing" secondItem="9N1-Mi-205" secondAttribute="trailing" id="kHL-Ty-bvE"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="ホーム" image="home" id="PTj-HD-6Bd"/>
+                    <connections>
+                        <outlet property="tableView" destination="9N1-Mi-205" id="54q-n8-X62"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OQU-EH-6hj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

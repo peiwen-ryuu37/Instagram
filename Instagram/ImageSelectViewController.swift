@@ -49,7 +49,7 @@ extension ImageSelectViewController: UIImagePickerControllerDelegate, UINavigati
 
     /// 写真を撮影/選択した時に呼ばれるメソッド
     /// - Parameters:
-    ///   - picker: 選択コントローラー
+    ///   - picker: UIImagePickerController
     ///   - info: 選択した画像情報
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         // 撮影/選択された画像を取得する
@@ -65,7 +65,7 @@ extension ImageSelectViewController: UIImagePickerControllerDelegate, UINavigati
     }
     
     /// キャンセルをタップした時に呼ばれるメソッド
-    /// - Parameter picker: 選択コントローラー
+    /// - Parameter picker: UIImagePickerController
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         // ImageSelectViewController画面を閉じてタブ画面に戻る
         self.presentingViewController?.dismiss(animated: true, completion: nil)
