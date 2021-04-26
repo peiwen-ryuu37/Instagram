@@ -7,6 +7,7 @@
 
 import UIKit
 import FirebaseUI
+import Firebase
 
 class PostTableViewCell: UITableViewCell {
     
@@ -20,10 +21,15 @@ class PostTableViewCell: UITableViewCell {
     @IBOutlet weak var commenterLabel: UILabel!
     @IBOutlet weak var commentLabel: UILabel!
     
+    @IBOutlet weak var commentStackView: UIStackView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        
+        self.commenterLabel.text = "コメント"
+        self.commentLabel.text = "0"
+
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -34,6 +40,7 @@ class PostTableViewCell: UITableViewCell {
     
     // PostDataの内容をセルに表示
     func setPostData(_ postData: PostData) {
+        
         // 画像の表示
         self.postImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
         let imageRef = Storage.storage().reference().child(Const.ImagePath).child(postData.id + ".jpg")
@@ -64,13 +71,128 @@ class PostTableViewCell: UITableViewCell {
             self.likeButton.setImage(buttonImage, for: .normal)
         }
         
-        //コメント者の表示
-        let commenter = "none"
-        self.commenterLabel.text = commenter
+
+        if postData.commentCounter != 0 {
+            
+            self.commentLabel.text = String(postData.commentCounter ?? 0)
+            //self.commentStackView.heightAnchor.constraint(equalToConstant: 150).isActive = true
+
+            for count in 0..<postData.commentCounter! {
+                // 元にあるstackViewを削除
+                self.commentStackView.subviews.forEach { (view) in
+                    view.removeFromSuperview()
+                }
+                print("###########\(String(postData.caption!)): \(count)")
+                self.getCommentData(postData, count)
+            }
+
+
+        } else {
+            self.commentLabel.text = "0"
+            //self.commentStackView.heightAnchor.constraint(equalToConstant: 150).isActive = false
+            // 元にあるstackViewを削除
+            self.commentStackView.subviews.forEach { (view) in
+                view.removeFromSuperview()
+            }
+            print("==============test:")
+            
+        }
         
-        //コメント内容を表示
-        let comment = "no data"
-        self.commentLabel.text = comment
+    }
+    
+    
+    
+    // コメントデータを取得
+    func getCommentData(_ postData: PostData, _ count: Int) {
+        
+        let postRef = Firestore.firestore().collection(Const.PostPath).document(postData.id).collection("commentsReceived").document(String(count))
+        
+        postRef.getDocument { (document, error) in
+            if let document = document, document.exists {
+                let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
+                print("Document data: \(dataDescription)")
+                
+                let getCommentor = document.data()?["commentor"] as! String
+                //print("getCommentor: \(getCommentor)")
+                
+                let getComment = document.data()?["comment"] as! String
+                //print("getComment: \(getComment)")
+                
+                // add view in stack view
+                let commentorLabel = UILabel()
+                //commentorLabel.backgroundColor = UIColor.customRed
+                commentorLabel.text = getCommentor
+                commentorLabel.textAlignment = .center
+                commentorLabel.widthAnchor.constraint(equalToConstant: 80).isActive = true
+
+                let commentLabel = UILabel()
+                //commentLabel.backgroundColor = UIColor.customSeaGreen
+                commentLabel.text = getComment
+
+                // 一つのコメントを格納するstackView
+                let stackView = UIStackView()
+//                stackView.translatesAutoresizingMaskIntoConstraints = false
+                stackView.axis  = NSLayoutConstraint.Axis.horizontal
+                stackView.distribution  = UIStackView.Distribution.fillProportionally
+                stackView.alignment = UIStackView.Alignment.top
+                stackView.spacing = 20.0
+                //stackView.backgroundColor = UIColor.customDarkCyan
+                stackView.widthAnchor.constraint(equalToConstant: self.commentStackView.frame.width).isActive = true
+                stackView.heightAnchor.constraint(equalToConstant: 50).isActive = true
+                stackView.addArrangedSubview(commentorLabel)
+                stackView.addArrangedSubview(commentLabel)
+                stackView.translatesAutoresizingMaskIntoConstraints = false
+                
+                
+                self.commentStackView.addArrangedSubview(stackView)
+                //self.commentStackView.addSubview(stackView)
+                
+            } else {
+                print("Document does not exist")
+            }
+        }
+
+        
+        
+        
+//        postRef.getDocuments() { (querySnapshot, err) in
+//            if let err = err {
+//                print("Error getting documents: \(err)")
+//            } else {
+//                for document in querySnapshot!.documents {
+//                    //print("@@@@@@@@@@@@\(document.documentID) => \(document.data())")
+//
+//                    let commentor = document.data()["commentor"] as! String
+//                    let comment = document.data()["comment"] as! String
+//                    print("documentID: \(document.documentID)")
+//                    print("commentor: \(commentor)")
+//                    print("comment: \(comment)")
+//                    print("/////////")
+//
+//                    // add view in stack view
+//                    let commentorLabel = UILabel()
+//                    commentorLabel.backgroundColor = UIColor.customRed
+//                    commentorLabel.text = commentor
+//
+//                    let commentLabel = UILabel()
+//                    commentLabel.backgroundColor = UIColor.customSeaGreen
+//                    commentLabel.text = comment
+//
+//                    // 一つのコメントを格納するstackView
+//                    let stackView = UIStackView()
+//                    stackView.axis  = NSLayoutConstraint.Axis.horizontal
+//                    stackView.distribution  = UIStackView.Distribution.fillEqually
+//                    stackView.alignment = UIStackView.Alignment.center
+//                    stackView.spacing   = 35.0
+//                    stackView.addArrangedSubview(commentorLabel)
+//                    stackView.addArrangedSubview(commentLabel)
+//
+//                    self.commentStackView.addArrangedSubview(stackView)
+//
+//                }
+//            }
+//        }
+
         
     }
     

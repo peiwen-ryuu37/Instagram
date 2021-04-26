@@ -79,18 +79,25 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! PostTableViewCell
         cell.setPostData(self.postArray[indexPath.row])
         
-        // セル内のボタンのアクションをソースコードで設定する
-        cell.likeButton.addTarget(self, action:#selector(handleButton(_:forEvent:)), for: .touchUpInside)
+        // コメントデータを取得
+        //cell.getCommentData(self.postArray[indexPath.row])
+        
+        // セル内のlikeボタンのアクションをソースコードで設定する
+        cell.likeButton.addTarget(self, action:#selector(handleLikeButton(_:forEvent:)), for: .touchUpInside)
+        
+        // セル内のcommentボタンのアクションをソースコードで設定する
+        cell.commentButton.addTarget(self, action:#selector(handleCommentButton(_:forEvent:)), for: .touchUpInside)
+ 
         
         return cell
     }
     
     
-    /// セル内のボタンがタップされた時に呼ばれるメソッド
+    /// セル内のlikeボタンがタップされた時に呼ばれるメソッド
     /// - Parameters:
     ///   - sender: UIButton
     ///   - event: タップイベント
-    @objc func handleButton(_ sender: UIButton, forEvent event: UIEvent) {
+    @objc func handleLikeButton(_ sender: UIButton, forEvent event: UIEvent) {
         print("DEBUG_PRINT: likeボタンがタップされました。")
 
         // タップされたセルのインデックスを求める
@@ -116,6 +123,28 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
             let postRef = Firestore.firestore().collection(Const.PostPath).document(postData.id)
             postRef.updateData(["likes": updateValue])
         }
+    }
+    
+    
+    /// セル内のcommentボタンがタップされた時に呼ばれるメソッド
+    /// - Parameters:
+    ///   - sender: UIButton
+    ///   - event: タップイベント
+    @objc func handleCommentButton(_ sender: UIButton, forEvent event: UIEvent) {
+
+        // タップされたセルのインデックスを求める
+        let touch = event.allTouches?.first
+        let point = touch!.location(in: self.tableView)
+        let indexPath = self.tableView.indexPathForRow(at: point)
+        // 配列からタップされたインデックスのデータを取り出す
+        let postData = self.postArray[indexPath!.row]
+        
+        // コメント画面を開く
+        let commentViewController = self.storyboard?.instantiateViewController(withIdentifier: "Comment") as! CommentViewController
+        commentViewController.postData = postData
+        self.present(commentViewController, animated: true, completion: nil)
+        
+
     }
     
 }

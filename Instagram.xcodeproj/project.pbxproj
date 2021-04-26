@@ -12,6 +12,9 @@
 		5AAF5EBB2631359900FE4AA9 /* PostData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AAF5EBA2631359900FE4AA9 /* PostData.swift */; };
 		5AAF5EBF2631365500FE4AA9 /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AAF5EBD2631365500FE4AA9 /* PostTableViewCell.swift */; };
 		5AAF5EC02631365500FE4AA9 /* PostTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5AAF5EBE2631365500FE4AA9 /* PostTableViewCell.xib */; };
+		5AAF5EC3263257C600FE4AA9 /* CommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AAF5EC2263257C600FE4AA9 /* CommentViewController.swift */; };
+		5AAF5EC6263262C900FE4AA9 /* CommentStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AAF5EC5263262C900FE4AA9 /* CommentStruct.swift */; };
+		5AAF5EC926357A4F00FE4AA9 /* CustomColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AAF5EC826357A4F00FE4AA9 /* CustomColors.swift */; };
 		5AF22B61262FE3E300914389 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AF22B60262FE3E300914389 /* AppDelegate.swift */; };
 		5AF22B63262FE3E300914389 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AF22B62262FE3E300914389 /* SceneDelegate.swift */; };
 		5AF22B68262FE3E300914389 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5AF22B66262FE3E300914389 /* Main.storyboard */; };
@@ -33,6 +36,9 @@
 		5AAF5EBA2631359900FE4AA9 /* PostData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostData.swift; sourceTree = "<group>"; };
 		5AAF5EBD2631365500FE4AA9 /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
 		5AAF5EBE2631365500FE4AA9 /* PostTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostTableViewCell.xib; sourceTree = "<group>"; };
+		5AAF5EC2263257C600FE4AA9 /* CommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentViewController.swift; sourceTree = "<group>"; };
+		5AAF5EC5263262C900FE4AA9 /* CommentStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentStruct.swift; sourceTree = "<group>"; };
+		5AAF5EC826357A4F00FE4AA9 /* CustomColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomColors.swift; sourceTree = "<group>"; };
 		5AF22B5D262FE3E300914389 /* Instagram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Instagram.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5AF22B60262FE3E300914389 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5AF22B62262FE3E300914389 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -83,7 +89,9 @@
 		5AF22B5F262FE3E300914389 /* Instagram */ = {
 			isa = PBXGroup;
 			children = (
+				5AAF5EC826357A4F00FE4AA9 /* CustomColors.swift */,
 				5AAF5EB626311DCA00FE4AA9 /* Const.swift */,
+				5AAF5EC5263262C900FE4AA9 /* CommentStruct.swift */,
 				5AAF5EBA2631359900FE4AA9 /* PostData.swift */,
 				5AAF5EBD2631365500FE4AA9 /* PostTableViewCell.swift */,
 				5AAF5EBE2631365500FE4AA9 /* PostTableViewCell.xib */,
@@ -94,6 +102,7 @@
 				5AF22B7B262FE4FF00914389 /* ImageSelectViewController.swift */,
 				5AF22B7E262FE51300914389 /* PostViewController.swift */,
 				5AF22B81262FE52A00914389 /* SettingViewController.swift */,
+				5AAF5EC2263257C600FE4AA9 /* CommentViewController.swift */,
 				5AF22B85262FF4C400914389 /* TabBarController.swift */,
 				5AF22B66262FE3E300914389 /* Main.storyboard */,
 				5AF22B69262FE3E500914389 /* Assets.xcassets */,
@@ -239,12 +248,15 @@
 			files = (
 				5AAF5EBF2631365500FE4AA9 /* PostTableViewCell.swift in Sources */,
 				5AF22B7C262FE4FF00914389 /* ImageSelectViewController.swift in Sources */,
+				5AAF5EC926357A4F00FE4AA9 /* CustomColors.swift in Sources */,
 				5AF22B86262FF4C400914389 /* TabBarController.swift in Sources */,
 				5AF22B79262FE4E100914389 /* HomeViewController.swift in Sources */,
 				5AF22B7F262FE51300914389 /* PostViewController.swift in Sources */,
 				5AF22B82262FE52A00914389 /* SettingViewController.swift in Sources */,
 				5AAF5EBB2631359900FE4AA9 /* PostData.swift in Sources */,
 				5AF22B76262FE4CF00914389 /* LoginViewController.swift in Sources */,
+				5AAF5EC3263257C600FE4AA9 /* CommentViewController.swift in Sources */,
+				5AAF5EC6263262C900FE4AA9 /* CommentStruct.swift in Sources */,
 				5AF22B61262FE3E300914389 /* AppDelegate.swift in Sources */,
 				5AF22B63262FE3E300914389 /* SceneDelegate.swift in Sources */,
 				5AAF5EB726311DCA00FE4AA9 /* Const.swift in Sources */,
