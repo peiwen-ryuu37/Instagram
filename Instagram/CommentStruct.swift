@@ -8,21 +8,6 @@
 import Foundation
 import Firebase
 
-//class CommentStruct {
-//    var comment: String?
-//    var commentor: String?
-//
-//    init(document: QueryDocumentSnapshot) {
-//
-//        let postDic = document.data()
-//
-//        self.comment = postDic["comment"] as? String
-//
-//        self.commentor = postDic["commentor"] as? String
-//    }
-//
-//}
-
 struct CommentStruct {
     var comment: String
     var commentor: String

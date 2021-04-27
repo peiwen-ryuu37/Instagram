@@ -73,17 +73,26 @@ class PostTableViewCell: UITableViewCell {
         
 
         if postData.commentCounter != 0 {
+            // 元にあるstackViewを削除
+            self.commentStackView.subviews.forEach { (view) in
+                view.removeFromSuperview()
+            }
             
             self.commentLabel.text = String(postData.commentCounter ?? 0)
-            //self.commentStackView.heightAnchor.constraint(equalToConstant: 150).isActive = true
+            
 
             for count in 0..<postData.commentCounter! {
-                // 元にあるstackViewを削除
-                self.commentStackView.subviews.forEach { (view) in
-                    view.removeFromSuperview()
-                }
+
                 print("###########\(String(postData.caption!)): \(count)")
-                self.getCommentData(postData, count)
+                //self.getCommentData(postData, count)
+                
+                let toaddCommentLabel = UILabel()
+                //toaddCommentLabel.backgroundColor = UIColor.customRed
+                toaddCommentLabel.text = postData.commentsArray[count]
+                toaddCommentLabel.textAlignment = .center
+                toaddCommentLabel.heightAnchor.constraint(equalToConstant: 50).isActive = true
+                self.commentStackView.addArrangedSubview(toaddCommentLabel)
+
             }
 
 
@@ -102,7 +111,7 @@ class PostTableViewCell: UITableViewCell {
     
     
     
-    // コメントデータを取得
+    // コメントデータを取得(ここにデータを取得しないよう)
     func getCommentData(_ postData: PostData, _ count: Int) {
         
         let postRef = Firestore.firestore().collection(Const.PostPath).document(postData.id).collection("commentsReceived").document(String(count))
@@ -151,49 +160,6 @@ class PostTableViewCell: UITableViewCell {
                 print("Document does not exist")
             }
         }
-
-        
-        
-        
-//        postRef.getDocuments() { (querySnapshot, err) in
-//            if let err = err {
-//                print("Error getting documents: \(err)")
-//            } else {
-//                for document in querySnapshot!.documents {
-//                    //print("@@@@@@@@@@@@\(document.documentID) => \(document.data())")
-//
-//                    let commentor = document.data()["commentor"] as! String
-//                    let comment = document.data()["comment"] as! String
-//                    print("documentID: \(document.documentID)")
-//                    print("commentor: \(commentor)")
-//                    print("comment: \(comment)")
-//                    print("/////////")
-//
-//                    // add view in stack view
-//                    let commentorLabel = UILabel()
-//                    commentorLabel.backgroundColor = UIColor.customRed
-//                    commentorLabel.text = commentor
-//
-//                    let commentLabel = UILabel()
-//                    commentLabel.backgroundColor = UIColor.customSeaGreen
-//                    commentLabel.text = comment
-//
-//                    // 一つのコメントを格納するstackView
-//                    let stackView = UIStackView()
-//                    stackView.axis  = NSLayoutConstraint.Axis.horizontal
-//                    stackView.distribution  = UIStackView.Distribution.fillEqually
-//                    stackView.alignment = UIStackView.Alignment.center
-//                    stackView.spacing   = 35.0
-//                    stackView.addArrangedSubview(commentorLabel)
-//                    stackView.addArrangedSubview(commentLabel)
-//
-//                    self.commentStackView.addArrangedSubview(stackView)
-//
-//                }
-//            }
-//        }
-
-        
     }
     
 }

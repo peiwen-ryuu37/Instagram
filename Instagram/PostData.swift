@@ -16,13 +16,15 @@ class PostData: NSObject {
     var likes: [String] = []
     var isLiked: Bool = false
     
-    //var commentors: [String] = []
+    // コメントがサブコレクションとして保存する必要がない
+    // 「いいね」ボタンのように文字列の配列として保存すれば良い
     var commentsReceived: [String:CommentStruct] = [:]
-    //var commentsSend: [String] = []
-    //var comment: String?
-    
+    //var commentsReceived: [CommentStruct] = []
+
     var commentCounter: Int?
-    //var comments: [CommentStruct]?
+    
+    // 「いいね」ボタンのようにコメントを保存する
+    var commentsArray: [String] = []
     
     init(document: QueryDocumentSnapshot) {
         self.id = document.documentID
@@ -42,26 +44,19 @@ class PostData: NSObject {
         
         self.commentCounter = postDic["commentCounter"] as? Int
         
-        
-//        if let commentors = postDic["commentors"] as? [String] {
-//            self.commentors = commentors
-//        }
-        
+
         if let commentsReceived = postDic["commentsReceived"] as? [String:CommentStruct]{
             self.commentsReceived = commentsReceived
         }
         
-//        if let commentsSend = postDic["commentsSend"] as? [String] {
-//            self.commentsSend = commentsSend
+//        if let commentsReceived = postDic["commentsReceived"] as? [CommentStruct]{
+//            self.commentsReceived = commentsReceived
 //        }
         
-        //self.comment = postDic["comment"] as? String
+        if let commentsArray = postDic["commentsArray"] as? [String] {
+            self.commentsArray = commentsArray
+        }
 
-        
-        //self.comments = postDic["commentsReceived"] as? [CommentStruct]
-        
-        
-        
         
         if let myid = Auth.auth().currentUser?.uid {
             // likesの配列の中にmyidが含まれているかチェックすることで、自分がいいねを押しているかを判断
@@ -70,41 +65,8 @@ class PostData: NSObject {
                 self.isLiked = true
             }
         }
-        
-        
-        
-        
-//        postDic["commentsReceived"].getDocument { (document, error) in
-//            if let document = document, document.exists {
-//                let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
-//                print("Document data: \(dataDescription)")
-//
-//                let getCommentCount = document.data()?["commentCounter"] as! Int
-//                print("getCommentCount: \(getCommentCount)")
-//
-//
-//                // コメントデータを追加する
-//                postRef.collection("commentsReceived").document(String(nowCommentCount)).setData(postDic)
-//
-//                // 毎回コメント後に合計値+1
-//                nowCommentCount += 1
-//
-//                print("DEBUG_PRINT: nowCommentCount after update: \(nowCommentCount)")
-//
-//                postRef.updateData(["commentCounter" : nowCommentCount])
-//
-//            } else {
-//                print("Document does not exist")
-//            }
-//        }
-        
-        
-        
-        
-        
+         
     }
-    
-    
     
     
 }

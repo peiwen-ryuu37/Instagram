@@ -38,7 +38,7 @@ class HomeViewController: UIViewController {
         if Auth.auth().currentUser != nil {
             // listenerを登録して投稿データの更新を監視する
             let postsRef = Firestore.firestore().collection(Const.PostPath).order(by: "date", descending: true)
-            listener = postsRef.addSnapshotListener() { (querySnapshot, error) in
+            listener = postsRef.addSnapshotListener() { [self] (querySnapshot, error) in
                 if let error = error {
                     print("DEBUG_PRINT: snapshotの取得が失敗しました。 \(error)")
                     return
@@ -47,6 +47,10 @@ class HomeViewController: UIViewController {
                 self.postArray = querySnapshot!.documents.map { document in
                     print("DEBUG_PRINT: document取得 \(document.documentID)")
                     let postData = PostData(document: document)
+                    // ##このタイミングでgetDocumentを実施する##
+
+                    print("DEBUG_PRINT: \(postData.commentsArray)")
+                    
                     return postData
                 }
                 // TableViewの表示を更新する
@@ -61,6 +65,8 @@ class HomeViewController: UIViewController {
         // listenerを削除して監視を停止する
         listener?.remove()
     }
+    
+
     
 
 

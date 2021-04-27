@@ -73,30 +73,7 @@ class CommentViewController: UIViewController {
         // commentを更新する
         if let myid = Auth.auth().currentUser?.uid {
             
-            // comment更新データを作成する
-            //let toUpdateComment: [String:String] = [name!: getComment]
-            
-//            let upDateCommenter: [String:String] = ["commenterName": name!]
-//            let upDateComment: [String:String] = ["commentContent": getComment]
-//
-//            let toUpdateComment = [upDateCommenter: upDateComment]
-            
-            
-            //------before
-//            let postDic = [
-//                "commentors": name!,
-//                "commentsSend": getComment
-//                ] as [String : Any]
-//
-//            // commentsReceivedに更新データを書き込む
-//            let postRef = Firestore.firestore().collection(Const.PostPath).document(postData.id)
-//            //postRef.updateData(["commentsReceived": toUpdateComment])
-//            postRef.updateData(["commentsReceived": postDic])
-            
-            //-----before------
-            
-            
-            let postDic = ["commentor": name!, "comment": getComment]
+            //let postDic = ["commentor": name!, "comment": getComment]
             
             let postRef = Firestore.firestore().collection(Const.PostPath).document(postData.id)
             
@@ -116,8 +93,11 @@ class CommentViewController: UIViewController {
                     
                     nowCommentCount = getCommentCount
                     
-                    // コメントデータを追加する
-                    postRef.collection("commentsReceived").document(String(nowCommentCount)).setData(postDic)
+                    // コメントデータを追加する(文字列の配列として保存)
+                    var updateCommentValue : FieldValue
+                    let myComment = "\(name!)さん - \(getComment)"
+                    updateCommentValue = FieldValue.arrayUnion([myComment])
+                    postRef.updateData(["commentsArray": updateCommentValue])
                     
                     // 毎回コメント後に合計値+1
                     nowCommentCount += 1
@@ -138,17 +118,13 @@ class CommentViewController: UIViewController {
         
         // コメントした後Home画面に戻る
         self.dismiss(animated: true, completion: nil)
-//        let homeViewController = self.storyboard?.instantiateViewController(withIdentifier: "Home") as! HomeViewController
-//        self.present(homeViewController, animated: true, completion: nil)
+
     }
     
     @IBAction private func handleCancelButton(_ sender: Any) {
         // Home画面に戻る
         self.dismiss(animated: true, completion: nil)
     }
-    
-    // MARK: - Function
-
     
 
 }
